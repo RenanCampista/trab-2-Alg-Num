@@ -15,6 +15,7 @@ def cubic_spline_natural(x, y):
     n = len(x)
     h = {k: x[k+1] - x[k] for k in range(n - 1)}
 
+    # Construção da matriz tridiagonal
     A = np.zeros((n, n))
     for i in range(1, n - 1):
         A[i, i-1] = h[i-1]
@@ -24,12 +25,15 @@ def cubic_spline_natural(x, y):
     A[0, 0] = 1
     A[-1, -1] = 1
 
+    # Construção do vetor B
     B = np.zeros(n)
     for k in range(1, n - 1):
         B[k] = 3 * ((y[k+1] - y[k]) / h[k] - (y[k] - y[k-1]) / h[k-1])
 
+    # Resolução do sistema linear para obter os coeficientes c
     c = np.linalg.solve(A, B)
 
+    # Cálculo dos demais coeficientes a, b, d
     a = y
     b = np.zeros(n-1)
     d = np.zeros(n-1)
@@ -58,7 +62,10 @@ def evaluate_spline(x, a, b, c, d, xi):
     while x[k+1] < xi:
         k += 1
 
+    # Distância do ponto xi para o ponto inicial do intervalo
     dx = xi - x[k]
+
+    # Avaliação do polinômio cúbico no ponto xi
     result = a[k] + b[k] * dx + c[k] * dx**2 + d[k] * dx**3
     return result
 
