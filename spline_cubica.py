@@ -71,4 +71,4 @@ else:
     plt.scatter(x_values, y_values, color='red', label='Pontos de Interpolação')
     plt.plot(plot_points, spline_images, label='Splines em D')
     plt.legend()
-    plt.show()
+    plt.savefig('spline.png')
