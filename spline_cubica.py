@@ -2,6 +2,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def cubic_spline_natural(x, y):
+    """
+    Calcula os coeficientes dos polinômios cúbicos naturais para interpolação.
+
+    Args:
+        x (list): Lista de coordenadas x dos pontos de interpolação.
+        y (list): Lista de coordenadas y dos pontos de interpolação.
+
+    Returns:
+        tuple: Coeficientes dos polinômios cúbicos naturais (a, b, c, d).
+    """
     n = len(x)
     h = {k: x[k+1] - x[k] for k in range(n - 1)}
 
@@ -30,6 +40,20 @@ def cubic_spline_natural(x, y):
     return a, b, c, d
 
 def evaluate_spline(x, a, b, c, d, xi):
+    """
+    Avalia o valor da spline cúbica no ponto xi.
+
+    Args:
+        x (list): Lista de coordenadas x dos pontos de interpolação.
+        a (list): Coeficientes a dos polinômios cúbicos naturais.
+        b (list): Coeficientes b dos polinômios cúbicos naturais.
+        c (list): Coeficientes c dos polinômios cúbicos naturais.
+        d (list): Coeficientes d dos polinômios cúbicos naturais.
+        xi (float): Ponto onde a spline cúbica é avaliada.
+
+    Returns:
+        float: Valor da spline cúbica no ponto xi.
+    """
     k = 0
     while x[k+1] < xi:
         k += 1
