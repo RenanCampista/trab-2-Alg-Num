@@ -84,13 +84,14 @@ else:
 
     # Calcular si(z)
     si_z = evaluate_spline(x_values, a, b, c, d, z_value)
-    print(f"Para z = {z_value}, si(z) = {si_z}")
+    print(f"Para z = {z_value}, si(z) = {si_z:.4f}")
 
     # Imprimir valores xi e suas respectivas imagens si(x) para o conjunto de m pontos em D
     print("Valores de xi e suas respectivas imagens si(x) para o conjunto de m pontos em D:")
     for i, xi in enumerate(np.linspace(x_values[0], x_values[-1], m)):
         si_xi = evaluate_spline(x_values, a, b, c, d, xi)
-        print(f"x{i} = {xi}, si(x{i}) = {si_xi}")
+        #limitar as casas decimais
+        print(f"x{i} = {xi:.1f}, si(x{i}) = {si_xi:.4f}")
 
     # Gerar pontos igualmente espaçados em D para plotagem
     plot_points = np.linspace(x_values[0], x_values[-1], m)
